@@ -2,37 +2,43 @@ import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 
-const client = generateClient<Schema>();
+type MeetingPlaceType = Schema['MeetingPlace']['type']
 
 function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const placesClient = generateClient<Schema>().models.MeetingPlace
 
-  useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }, []);
+    const [meetingPlaces, setMeetingPlaces] = useState<Array<MeetingPlaceType>>([])
 
-  function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
+useEffect(() => {
+        placesClient.observeQuery({
+            authMode: 'apiKey'
+        }).subscribe({
+            next: (data) => setMeetingPlaces([...data.items])
+        });
+    }, []);
+
+    function createPlace() {
+        placesClient.create({
+            location: window.prompt('Place location')!
+        }, {
+            authMode: 'apiKey'
+        })
+    }
+
+
+  // function deletePlace(id: string) {
+  //   placesClient.delete({ id })
+  // }
 
   return (
     <main>
-      <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
+      <button onClick={createPlace}>Create place</button>
+        <h3>All places:</h3>
+        <ul>
+            {meetingPlaces.map((place) => (
+                <li key={place.id}>{place.location}</li>
+            ))}
+        </ul>
     </main>
   );
 }
