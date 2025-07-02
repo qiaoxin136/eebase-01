@@ -628,7 +628,7 @@ function App() {
                       {clickInfo.properties.type} <br />
                       <Button
                         onClick={() => {
-                          console.log(clickInfo.properties.id);
+                          console.log(clickInfo);
                           deletePlace(clickInfo.properties.id);
                           setShowPopup(false);
                         }}
