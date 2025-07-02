@@ -19,24 +19,25 @@ useEffect(() => {
 
     function createPlace() {
         placesClient.create({
-            location: window.prompt('Place location')!
+            location: window.prompt('Place location')!,
+            rating: 5, 
         }, {
             authMode: 'apiKey'
         })
     }
 
 
-  // function deletePlace(id: string) {
-  //   placesClient.delete({ id })
-  // }
+  function deletePlace(id: string) {
+    placesClient.delete({ id })
+  }
 
   return (
     <main>
       <button onClick={createPlace}>Create place</button>
         <h3>All places:</h3>
-        <ul>
+        <ul >
             {meetingPlaces.map((place) => (
-                <li key={place.id}>{place.location}</li>
+                <li  onClick={() => deletePlace(place.id)}key={place.id}>{place.location} + {place.rating}</li>
             ))}
         </ul>
     </main>
