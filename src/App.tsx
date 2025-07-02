@@ -19,8 +19,13 @@ useEffect(() => {
 
     function createPlace() {
         placesClient.create({
-            location: window.prompt('Place location')!,
-            rating: 5, 
+            date: "2025-10-22", 
+            time: "09:30", 
+            track: 1,
+            type: "wastewater", 
+            status: "true", 
+            lat: 26.0003,
+            long: -78.82341,
         }, {
             authMode: 'apiKey'
         })
@@ -37,7 +42,7 @@ useEffect(() => {
         <h3>All places:</h3>
         <ul >
             {meetingPlaces.map((place) => (
-                <li  onClick={() => deletePlace(place.id)}key={place.id}>{place.location} + {place.rating}</li>
+                <li  onClick={() => deletePlace(place.id)}key={place.id}>{place.date}{place.lat}{place.long}</li>
             ))}
         </ul>
     </main>

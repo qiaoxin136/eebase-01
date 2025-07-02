@@ -9,8 +9,13 @@ specifies that any user authenticated via an API key can "create", "read",
 const schema = a.schema({
   MeetingPlace: a
     .model({
-      location: a.string().required(),
-      rating: a.integer()
+      date: a.date(), 
+      time: a.time(), 
+      track: a.integer(),
+      type: a.string(), 
+      status: a.string(), 
+      lat: a.float(),
+      long: a.float(),
     })
     .authorization((allow) => [
       allow.publicApiKey()
