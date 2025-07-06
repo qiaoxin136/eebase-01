@@ -596,9 +596,9 @@ function App() {
               <>
                 <Map
                   initialViewState={{
-                    longitude: -80.22836336572045,
-                    latitude: 26.02072268488061,
-                    zoom: 16,
+                    longitude: -80.22909086252992,
+                    latitude: 26.018957965336597,
+                    zoom: 18,
                   }}
                   mapLib={maplibregl}
                   mapStyle={MAP_STYLE} // Use any MapLibre-compatible style
