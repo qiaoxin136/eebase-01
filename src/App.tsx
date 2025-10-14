@@ -101,7 +101,7 @@ type SelectOption = {
 };
 
 const AIR_PORTS =
-  "https://5kzjv45lq2.execute-api.us-east-2.amazonaws.com/test/getData";
+  "https://7x7b42xq02.execute-api.us-east-1.amazonaws.com/test/getData";
 
 
 
@@ -152,6 +152,19 @@ function App() {
     { value: 'start', label: 'Start' },
     { value: 'continue', label: 'Continue' },
     { value: 'end', label: 'End' },
+  ];
+
+  const options3: SelectOption[] = [
+    { value: '6', label: '6' },
+    { value: '8', label: '8' },
+    { value: '10', label: '10' },
+    { value: '12', label: '12' },
+    { value: '15', label: '15' },
+    { value: '18', label: '18' },
+    { value: '24', label: '24' },
+    { value: '30', label: '30' },
+    { value: '36', label: '36' },
+    { value: '42', label: '42' },
   ];
 
   const layers = [
@@ -387,6 +400,12 @@ function App() {
     setStatus(value);
   }
 
+  const handleSelectChange3 = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    console.log(value);
+    setStatus(value);
+  }
+
   useEffect(() => {
     placesClient.observeQuery({
       authMode: 'apiKey'
@@ -578,6 +597,19 @@ function App() {
           width="100%"
         >
           {options2.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </SelectField>
+        <SelectField
+          label="Select an option"
+          labelHidden={true}
+          value={status}
+          onChange={handleSelectChange3}
+          width="100%"
+        >
+          {options3.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
