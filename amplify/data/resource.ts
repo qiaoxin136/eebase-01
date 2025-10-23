@@ -15,6 +15,7 @@ const schema = a.schema({
       type: a.string(), 
       status: a.string(), 
       diameter: a.float(),
+      length: a.float(), 
       lat: a.float(),
       long: a.float(),
     })
