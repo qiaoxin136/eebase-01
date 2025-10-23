@@ -131,6 +131,7 @@ function App() {
   const [track, setTrack] = useState<number>();
   const [type, setType] = useState<string>("water");
   const [status, setStatus]=useState<string>("start");
+  const [diameter, setDiameter]=useState<number>();
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
 
@@ -154,7 +155,7 @@ function App() {
     { value: 'end', label: 'End' },
   ];
 
-  const options3: SelectOption[] = [
+  /* const options3: SelectOption[] = [
     { value: '6', label: '6' },
     { value: '8', label: '8' },
     { value: '10', label: '10' },
@@ -165,7 +166,7 @@ function App() {
     { value: '30', label: '30' },
     { value: '36', label: '36' },
     { value: '42', label: '42' },
-  ];
+  ]; */
 
   const layers = [
 
@@ -390,21 +391,19 @@ function App() {
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    console.log(value);
+    //console.log(value);
     setType(value);
   }
 
   const handleSelectChange2 = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    console.log(value);
+    //console.log(value);
     setStatus(value);
   }
 
-  const handleSelectChange3 = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    console.log(value);
-    setStatus(value);
-  }
+  const handleDiameter = (e: ChangeEvent<HTMLInputElement>) => {
+    setDiameter(parseInt(e.target.value));
+   }
 
   useEffect(() => {
     placesClient.observeQuery({
@@ -602,19 +601,13 @@ function App() {
             </option>
           ))}
         </SelectField>
-        <SelectField
-          label="Select an option"
-          labelHidden={true}
-          value={status}
-          onChange={handleSelectChange3}
-          width="100%"
-        >
-          {options3.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </SelectField>
+        <input
+          type="number"
+          value={diameter}
+          placeholder="diameter"
+          onChange={handleDiameter}
+          //width="150%"
+        />
         <Input type="number" value={lat} />
         <Input type="number" value={lng} />
       </Flex>
@@ -731,13 +724,14 @@ function App() {
                       }}>
                       <TableHead>
                         <TableRow>
-                           <TableCell as="th" style={{ width: '15%' }}>Date</TableCell>
-                          <TableCell as="th" style={{ width: '15%' }}>Time</TableCell>
-                          <TableCell as="th" style={{ width: '10%' }}>Track</TableCell>
-                          <TableCell as="th" style={{ width: '15%' }}>Type</TableCell>
-                           <TableCell as="th" style={{ width: '15%' }}>Status</TableCell>
-                          <TableCell as="th" style={{ width: '15%' }}>Latitude</TableCell>
-                          <TableCell as="th" style={{ width: '15%' }}>Longitude</TableCell>
+                           <TableCell as="th" /* style={{ width: '15%' }} */>Date</TableCell>
+                          <TableCell as="th" /* style={{ width: '15%' }} */>Time</TableCell>
+                          <TableCell as="th" /* style={{ width: '10%' }} */>Track</TableCell>
+                          <TableCell as="th" /* style={{ width: '15%' }} */>Type</TableCell>
+                           <TableCell as="th" /* style={{ width: '15%' }} */>Status</TableCell>
+                           <TableCell as="th" /* style={{ width: '15%' }} */>Diameter</TableCell>
+                          <TableCell as="th" /* style={{ width: '15%' }} */>Latitude</TableCell>
+                          <TableCell as="th" /* style={{ width: '15%' }} */>Longitude</TableCell>
                         </TableRow>
                         <TableBody>
                           {meetingPlaces.map((place) => (
@@ -745,13 +739,14 @@ function App() {
                               onClick={() => deletePlace(place.id)}
                               key={place.id}
                             >
-                             <TableCell width="15%">{place.date}</TableCell>
-                              <TableCell width="15%">{place.time}</TableCell>
-                              <TableCell width="10%">{place.track}</TableCell>
-                              <TableCell width="15%">{place.type}</TableCell>
-                              <TableCell width="15%">{place.status}</TableCell>
-                              <TableCell width="15%">{place.lat}</TableCell>
-                              <TableCell width="15%">{place.long}</TableCell>
+                             <TableCell /* width="15%" */>{place.date}</TableCell>
+                              <TableCell /* width="15%" */>{place.time}</TableCell>
+                              <TableCell /* width="10%" */>{place.track}</TableCell>
+                              <TableCell /* width="15%" */>{place.type}</TableCell>
+                              <TableCell /* width="15%" */>{place.status}</TableCell>
+                              <TableCell /* width="15%" */>{place.diameter}</TableCell>
+                              <TableCell /* width="15%" */>{place.lat}</TableCell>
+                              <TableCell /* width="15%" */>{place.long}</TableCell>
                             </TableRow>
                           ))}
                         </TableBody>

@@ -14,6 +14,7 @@ const schema = a.schema({
       track: a.integer(),
       type: a.string(), 
       status: a.string(), 
+      diameter: a.float(),
       lat: a.float(),
       long: a.float(),
     })
